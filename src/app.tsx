@@ -1,13 +1,15 @@
 import { Routes, Route, NavLink, HashRouter as Router } from 'react-router-dom'
 
 import Home from '~/pages/home'
+import Chapter00 from '~/pages/chapter-00'
 import Chapter01 from '~/pages/chapter-01'
 
 import './app.scss'
 
 const config = [
     { path: '/', text: 'Home', element: <Home /> },
-    { path: '/chapter-01', text: 'Chapter 01', element: <Chapter01 /> },
+    { path: '/chapter-00', text: 'Chapter-00', element: <Chapter00 /> },
+    { path: '/chapter-01', text: 'Chapter-01', element: <Chapter01 /> },
 ]
 
 export default () => {
