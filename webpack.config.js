@@ -20,15 +20,18 @@ module.exports = () => {
         },
         module: {
             rules: [
+
                 {
                     test: /\.[jt]sx?$/,
-                    use: [{
-                        loader: 'esbuild-loader',
-                        options: {
-                            // tsconfig: './tsconfig.json',
-                            // jsx: 'react-jsx'
+                    use: [
+                        {
+                            loader: 'esbuild-loader',
+                            options: {
+                                // tsconfig: './tsconfig.json',
+                                // jsx: 'react-jsx'
+                            }
                         }
-                    }]
+                    ]
                 },
                 {
                     test: /\.css$/,
@@ -63,6 +66,6 @@ module.exports = () => {
             port: 9002,
             hot: true,
             open: true,
-        }
+        },
     }
 }
