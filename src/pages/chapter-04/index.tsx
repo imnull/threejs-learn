@@ -21,7 +21,7 @@ export default () => {
             onMounted={
                 ({ camera, renderer, scene, canvas }) => {
 
-                    camera.position.set(0, 0, 100);
+                    camera.position.set(0, 0, 30);
                     camera.lookAt(0, 0, 0);
 
                     const clock = new THREE.Clock();
@@ -41,6 +41,7 @@ export default () => {
                     loader.setDRACOLoader(draco)
                     loader.load(MODEL_URL, (gltf) => {
                         const model = gltf.scene;
+                        console.log(111111, model)
                         model.position.set(0, 0, 0);
                         model.scale.set(10, 10, 10)
                         scene.add(model);
