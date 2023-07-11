@@ -1,6 +1,7 @@
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = () => {
     return {
@@ -20,18 +21,31 @@ module.exports = () => {
         },
         module: {
             rules: [
-
+                // {
+                //     test: /\.[jt]sx?$/,
+                //     use: [
+                //         {
+                //             loader: 'esbuild-loader',
+                //             options: {
+                //                 // tsconfig: './tsconfig.json',
+                //                 // jsx: 'react-jsx'
+                //             }
+                //         }
+                //     ]
+                // },
                 {
                     test: /\.[jt]sx?$/,
-                    use: [
-                        {
-                            loader: 'esbuild-loader',
-                            options: {
-                                // tsconfig: './tsconfig.json',
-                                // jsx: 'react-jsx'
-                            }
+                    use: [{
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                ['@babel/preset-react', {
+                                    runtime: 'automatic'
+                                }],
+                                '@babel/preset-typescript'
+                            ],
                         }
-                    ]
+                    }]
                 },
                 {
                     test: /\.css$/,
@@ -53,19 +67,22 @@ module.exports = () => {
                 inject: 'body',
                 hash: true,
             }),
-            // new CopyWebpackPlugin({
-            //     patterns: [
-            //         {
-            //             from: 'src/components/widget/type.ts',
-            //             to: 'component-widget.d.ts'
-            //         }
-            //     ]
-            // }),
+            new CopyWebpackPlugin({
+                patterns: [
+                    {
+                        from: 'public',
+                        to: '.'
+                    }
+                ]
+            }),
         ],
         devServer: {
             port: 9002,
             hot: true,
             open: true,
+            static: {
+                directory: path.resolve('public')
+            }
         },
     }
 }

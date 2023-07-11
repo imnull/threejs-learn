@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "routes": "node scripts/make-routes.js",
+    "build": "webpack",
     "dev": "webpack serve"
   },
   "repository": {
@@ -21,9 +22,13 @@
   "homepage": "https://github.com/imnull/threejs-learn#readme",
   "devDependencies": {
     "@babel/core": "^7.22.8",
+    "@babel/preset-react": "^7.22.5",
+    "@babel/preset-typescript": "^7.22.5",
+    "@types/draco3d": "^1.4.2",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "@types/three": "^0.153.0",
+    "axios": "^1.4.0",
     "babel-loader": "^9.1.3",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
@@ -41,6 +46,10 @@
     "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
+    "@loaders.gl/core": "^3.4.6",
+    "@loaders.gl/draco": "^3.4.6",
+    "@loaders.gl/gltf": "^3.4.6",
+    "draco3d": "^1.5.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.1",

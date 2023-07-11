@@ -3,13 +3,14 @@ import * as THREE from 'three'
 import ThreejsRender from "~/components/threejs-render"
 import Archor from '~/components/archor'
 
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment'
+import { GLTFLoader } from '~/three-addons/loaders/GLTFLoader'
+import { DRACOLoader } from '~/three-addons/loaders/DRACOLoader'
+import { OrbitControls } from '~/three-addons/controls/OrbitControls'
+import { RoomEnvironment } from '~/three-addons/environments/RoomEnvironment'
 
-const MODEL_URL = 'https://github.khronos.org/glTF-Sample-Viewer-Release/assets/models/2.0/DamagedHelmet/glTF/DamagedHelmet.gltf'
-// const MODEL_URL = 'http://127.0.0.1/git/gltf/01/m.gltf'
+const MODEL_URL = '/assets/models/DamagedHelmet.gltf'
+// const MODEL_URL = 'http://127.0.0.1/git/gltf/01/m.glb'
+// const MODEL_URL = 'https://api.vntana.com//assets/products/7eed7d1b-bd3e-4786-ba36-a7bf0b263143/organizations/kohler/clients/150th-anniversary/c1e42caf-93b5-47c3-860a-70f90230b238.glb'
 
 export default () => {
     return <>
@@ -29,7 +30,7 @@ export default () => {
 
                     const draco = new DRACOLoader()
                     draco.setDecoderConfig({ type: 'js' });
-                    draco.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
+                    draco.setDecoderPath('/assets/threejs/');
 
                     const controls = new OrbitControls(camera, canvas)
                     controls.target.set(0, 0, 0);
@@ -37,22 +38,21 @@ export default () => {
                     controls.enablePan = false;
                     controls.enableDamping = true;
 
+                    scene.background = new THREE.Color(0xbfe3dd);
+                    scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
+
                     const loader = new GLTFLoader()
                     loader.setDRACOLoader(draco)
                     loader.load(MODEL_URL, (gltf) => {
                         const model = gltf.scene;
-                        console.log(111111, model)
                         model.position.set(0, 0, 0);
                         model.scale.set(10, 10, 10)
                         scene.add(model);
                         animate();
                     })
 
-                    scene.background = new THREE.Color(0xbfe3dd);
-                    scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
 
                     let h = 0
-
                     function animate() {
                         h = requestAnimationFrame(animate);
                         const delta = clock.getDelta();
