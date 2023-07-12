@@ -8,9 +8,10 @@ export type TPropsBase = {
     aspect: number;
     near: number;
     far: number;
+    position?: [number, number, number];
 }
 
-export type TProps = { [key in keyof TPropsBase]?: number; }
+export type TProps = { [key in keyof TPropsBase]?: TPropsBase[key]; }
 
 export const name = 'perspective-camera'
 
@@ -37,8 +38,10 @@ export const get = (props: any) => {
         aspect = 1,
         near = 0.1,
         far = 2000,
+        position = [0, 0, 0],
     } = props
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far)
+    camera.position.set(...(position as [number, number, number]))
     return camera
 }
 

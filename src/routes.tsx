@@ -4,7 +4,8 @@ import Chapter01 from '~/pages/chapter-01';
 import Chapter02 from '~/pages/chapter-02';
 import Chapter03 from '~/pages/chapter-03';
 import Chapter04 from '~/pages/chapter-04';
-import Chapter05 from '~/pages/chapter-05'
+import Chapter05 from '~/pages/chapter-05';
+import Chapter06 from '~/pages/chapter-06'
 
 export default [
     { path: '/', text: 'Home', element: <Home /> },
@@ -13,5 +14,6 @@ export default [
     { path: 'chapter-02', text: 'Chapter02', element: <Chapter02 /> },
     { path: 'chapter-03', text: 'Chapter03', element: <Chapter03 /> },
     { path: 'chapter-04', text: 'Chapter04', element: <Chapter04 /> },
-    { path: 'chapter-05', text: 'Chapter05', element: <Chapter05 /> }
+    { path: 'chapter-05', text: 'Chapter05', element: <Chapter05 /> },
+    { path: 'chapter-06', text: 'Chapter06', element: <Chapter06 /> }
 ];

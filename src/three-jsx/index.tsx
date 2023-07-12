@@ -27,6 +27,7 @@ import WebGLRender from './webgl-render'
 import { OrbitControls as _OrbitControls } from '~/three-addons/controls/OrbitControls'
 
 import { loadGLTF } from './utils'
+import * as THREE from "three"
 
 type TElementName = typeof OrbitControlsName | typeof PerspectiveCameraName | typeof SceneName | typeof ResourceName
 
@@ -88,6 +89,7 @@ export const ThreeRenderer = (props: {
         let scene: THREE.Scene | null = null
         let controls: _OrbitControls | null = null
 
+        const mixers: THREE.AnimationMixer[] = []
         const resources = getResouceFromChildren(children)
 
         if (resources.scene) {
@@ -100,9 +102,10 @@ export const ThreeRenderer = (props: {
 
         if (resources["perspective-camera"]) {
             camera = getPerspectiveCamera({ ...resources["perspective-camera"], aspect: width / height });
-            (camera as THREE.PerspectiveCamera).aspect = width / height
+            (camera as THREE.PerspectiveCamera).aspect = width / height;
             camera.position.set(0, 0, 30);
             camera.lookAt(0, 0, 0);
+            (camera as THREE.PerspectiveCamera).updateProjectionMatrix();
         }
         if (!camera) {
             console.log('请放置一个摄像机<Camera>')
@@ -112,18 +115,21 @@ export const ThreeRenderer = (props: {
         if (resources["orbit-controls"]) {
             controls = getOrbitControls(resources["orbit-controls"], camera, canvas)
         }
-
+        const clock = new THREE.Clock();
         let h = 0
         const animate = () => {
             if (!scene || !renderer || !camera) {
                 return
             }
             h = requestAnimationFrame(animate);
+            const delta = clock.getDelta()
+            mixers.forEach(mixer => mixer.update(delta))
             controls && controls.update()
             renderer.render(scene, camera);
         }
         controls && controls.update();
         animate()
+
 
         if (Array.isArray(resources.resource) && resources.resource.length > 0) {
             const list = resources.resource as TResourceItem[]
@@ -135,6 +141,12 @@ export const ThreeRenderer = (props: {
                     model.scale.set(...item.scale)
                     scene?.add(model)
                     typeof item.onLoad === 'function' && item.onLoad(gltf)
+
+                    if (gltf.animations.length > 0) {
+                        const mixer = new THREE.AnimationMixer(model)
+                        mixer.clipAction(gltf.animations[0]).play()
+                        mixers.push(mixer)
+                    }
                 })
             })
         }

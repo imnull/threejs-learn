@@ -15,29 +15,29 @@ import { GLTF } from "~/three-addons/loaders/GLTFLoader";
 
 export default () => {
 
-    const [gltf, setGLTF] = useState<GLTF | null>(null)
+    // const [gltf, setGLTF] = useState<GLTF | null>(null)
 
-    useEffect(() => {
-        if(!gltf) {
-            return
-        }
+    // useEffect(() => {
+    //     if(!gltf) {
+    //         return
+    //     }
         
-        let a = 0
-        const h = setInterval(() => {
-            a = (a + 1) % 360
-            const x = Math.sin(a * (Math.PI / 180)) * 10
-            const y = Math.cos(a * (Math.PI / 180)) * 10
-            gltf.scene.position.set(x, 0, y)
-            gltf.scene.rotateX(Math.PI / 180)
-        }, 30)
+    //     let a = 0
+    //     const h = setInterval(() => {
+    //         a = (a + 1) % 360
+    //         const x = Math.sin(a * (Math.PI / 180)) * 10
+    //         const y = Math.cos(a * (Math.PI / 180)) * 10
+    //         gltf.scene.position.set(x, 0, y)
+    //         gltf.scene.rotateX(Math.PI / 180)
+    //     }, 30)
 
-        return () => {
-            clearInterval(h)
-        }
-    }, [gltf])
+    //     return () => {
+    //         clearInterval(h)
+    //     }
+    // }, [gltf])
 
     return <>
-        <h1>Loading 3D by JSX</h1>
+        <h1>ThreeJSX</h1>
         <ThreeRenderer antialias>
             <OrbitControls enableDamping />
             <PerspectiveCamera fov={45} />
@@ -48,12 +48,12 @@ export default () => {
             <Resource>
                 <ResourceLoader
                     type="gltf"
-                    uri="assets/models/DamagedHelmet.gltf"
+                    uri="assets/models/DamagedHelmet/DamagedHelmet.gltf"
                     scale={[8, 8, 8]}
                     position={[0, 0, 0]}
-                    onLoad={gltf => {
-                        setGLTF(gltf)
-                    }}
+                    // onLoad={gltf => {
+                    //     setGLTF(gltf)
+                    // }}
                 />
             </Resource>
         </ThreeRenderer>
