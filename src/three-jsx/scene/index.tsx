@@ -39,7 +39,6 @@ export const get = (props: any, renderer: THREE.WebGLRenderer) => {
     if(environment) {
         scene.environment = getEnvironment(environment, renderer)
     }
-    console.log(scene)
     return scene
 }
 

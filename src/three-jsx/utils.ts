@@ -12,7 +12,7 @@ export const loadGLTF = (url: string) => new Promise<GLTF>((resolve, reject) => 
     loader.load(url, (gltf) => {
         resolve(gltf)
     }, (evt) => {
-        console.log(evt)
+        // console.log(evt)
     }, err => {
         reject(err)
     })
