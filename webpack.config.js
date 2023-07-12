@@ -4,13 +4,13 @@ const HTMLWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = (options) => {
-    const { WEBPACK_SERVE = false } = options
+    const { WEBPACK_SERVE = false, target = 'dist' } = options
     const mode = WEBPACK_SERVE ? 'development' : 'production'
     return {
         mode,
         entry: './src/index',
         output: {
-            path: path.resolve('dist'),
+            path: path.resolve(target),
             filename: 'threejs-learn.js',
             libraryTarget: 'commonjs2',
         },
