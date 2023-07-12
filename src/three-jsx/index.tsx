@@ -60,14 +60,16 @@ export { default as Environment } from './environment'
 
 
 
-export const ThreeProvider = (props: {
+export const ThreeRenderer = (props: {
     width?: number;
     height?: number;
+    antialias?: boolean;
     children?: any;
 }) => {
     const {
         width = 960,
         height = 540,
+        antialias = false,
         children
     } = props
 
@@ -141,8 +143,11 @@ export const ThreeProvider = (props: {
         }
     }, [canvas, renderer])
 
-    return <WebGLRender width={width} height={height} onMounted={
-        ({ canvas, renderer }) => {
+    return <WebGLRender
+        width={width}
+        height={height}
+        antialias={antialias}
+        onMounted={({ canvas, renderer }) => {
             setCanvas(canvas)
             setRenderer(renderer)
         }}

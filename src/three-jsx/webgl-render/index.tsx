@@ -4,6 +4,7 @@ import * as THREE from "three";
 export default (props: {
     width?: number;
     height?: number;
+    antialias?: boolean;
     onMounted?: (params: {
         canvas: HTMLCanvasElement;
         renderer: THREE.WebGLRenderer;
@@ -11,7 +12,7 @@ export default (props: {
         height: number;
     }) => void
 }) => {
-    const { width = 1280, height = 720, onMounted } = props
+    const { antialias = false, width = 1280, height = 720, onMounted } = props
     const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null)
 
     useEffect(() => {
@@ -19,7 +20,7 @@ export default (props: {
             const width = Number(canvas.width)
             const height = Number(canvas.height)
 
-            const renderer = new THREE.WebGLRenderer({ canvas });
+            const renderer = new THREE.WebGLRenderer({ canvas, antialias });
             renderer.setSize(width, height);
             return onMounted({ canvas, renderer, width, height })
         }

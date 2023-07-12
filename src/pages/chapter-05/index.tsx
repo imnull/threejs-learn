@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./index.scss"
 
 import {
-    ThreeProvider,
+    ThreeRenderer,
     OrbitControls,
     PerspectiveCamera,
     Scene,
@@ -10,12 +10,12 @@ import {
     Environment,
     Resource,
     ResourceLoader,
-} from "./three-elements"
+} from "~/three-jsx"
 
 export default () => {
     return <>
         <h1>Loading 3D by JSX</h1>
-        <ThreeProvider>
+        <ThreeRenderer antialias>
             <OrbitControls enableDamping />
             <PerspectiveCamera fov={45} />
             <Scene>
@@ -25,6 +25,6 @@ export default () => {
             <Resource>
                 <ResourceLoader type="gltf" uri="/assets/models/DamagedHelmet.gltf" scale={[8, 8, 8]} position={[0, 0, 0]} />
             </Resource>
-        </ThreeProvider>
+        </ThreeRenderer>
     </>
 }
