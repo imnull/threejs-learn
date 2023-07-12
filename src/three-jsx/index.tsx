@@ -129,10 +129,12 @@ export const ThreeRenderer = (props: {
             const list = resources.resource as TResourceItem[]
             Promise.all(list.map(({ uri }) => loadGLTF(uri))).then(gltfs => {
                 gltfs.forEach((gltf, i) => {
+                    const item = list[i]
                     const model = gltf.scene
-                    model.position.set(...list[i].position)
-                    model.scale.set(...list[i].scale)
+                    model.position.set(...item.position)
+                    model.scale.set(...item.scale)
                     scene?.add(model)
+                    typeof item.onLoad === 'function' && item.onLoad(gltf)
                 })
             })
         }

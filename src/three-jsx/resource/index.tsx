@@ -1,4 +1,5 @@
-import React from "react";
+import React from "react"
+import { GLTF } from '~/three-addons/loaders/GLTFLoader'
 
 export type TResourceType = 'gltf'
 export type TResourceItem = {
@@ -6,6 +7,7 @@ export type TResourceItem = {
     uri: string;
     position: [number, number, number];
     scale: [number, number, number];
+    onLoad?: (gltf: GLTF) => void;
 }
 
 export const ResourceLoader = (props: {
@@ -13,6 +15,7 @@ export const ResourceLoader = (props: {
     uri: string;
     position?: [number, number, number];
     scale?: [number, number, number];
+    onLoad?: (gltf: GLTF) => void;
 }): JSX.Element | null => {
     return null
 }
@@ -28,12 +31,14 @@ const getResourceList = (children: any): TResourceItem[] => {
                 type = 'gltf',
                 uri = '',
                 position: [x = 0, y = 0, z = 0] = [],
-                scale: [l = 1, m = 1, n = 1] = []
+                scale: [l = 1, m = 1, n = 1] = [],
+                onLoad,
             } = children.props as any
             return [{
                 type, uri,
                 position: [x, y, z],
-                scale: [l, m, n]
+                scale: [l, m, n],
+                onLoad,
             }]
         }
     }

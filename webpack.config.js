@@ -3,9 +3,11 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
-module.exports = () => {
+module.exports = (options) => {
+    const { WEBPACK_SERVE = false } = options
+    const mode = WEBPACK_SERVE ? 'development' : 'production'
     return {
-        mode: 'development',
+        mode,
         entry: './src/index',
         output: {
             path: path.resolve('dist'),
