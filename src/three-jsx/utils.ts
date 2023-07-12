@@ -4,7 +4,7 @@ import { DRACOLoader } from '~/three-addons/loaders/DRACOLoader'
 
 const DRACO_LOADER = new DRACOLoader()
 DRACO_LOADER.setDecoderConfig({ type: 'js' })
-DRACO_LOADER.setDecoderPath('/assets/threejs/')
+DRACO_LOADER.setDecoderPath('assets/threejs/')
 
 export const loadGLTF = (url: string) => new Promise<GLTF>((resolve, reject) => {
     const loader = new GLTFLoader()
