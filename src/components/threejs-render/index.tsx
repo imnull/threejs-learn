@@ -23,7 +23,7 @@ export default (props: {
             const width = Number(canvas.width)
             const height = Number(canvas.height)
 
-            const renderer = new THREE.WebGLRenderer({ canvas });
+            const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, });
             renderer.setSize(width, height);
 
             const camera = new THREE.PerspectiveCamera(cameraFov, width / height, cameraNear, cameraFar);

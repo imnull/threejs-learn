@@ -9,8 +9,6 @@ import { OrbitControls } from '~/three-addons/controls/OrbitControls'
 import { RoomEnvironment } from '~/three-addons/environments/RoomEnvironment'
 
 const MODEL_URL = '/assets/models/DamagedHelmet.gltf'
-// const MODEL_URL = 'http://127.0.0.1/git/gltf/01/m.glb'
-// const MODEL_URL = 'https://api.vntana.com//assets/products/7eed7d1b-bd3e-4786-ba36-a7bf0b263143/organizations/kohler/clients/150th-anniversary/c1e42caf-93b5-47c3-860a-70f90230b238.glb'
 
 export default () => {
     return <>
@@ -25,7 +23,6 @@ export default () => {
                     camera.position.set(0, 0, 30);
                     camera.lookAt(0, 0, 0);
 
-                    const clock = new THREE.Clock();
                     const pmremGenerator = new THREE.PMREMGenerator(renderer);
 
                     const draco = new DRACOLoader()
@@ -55,7 +52,6 @@ export default () => {
                     let h = 0
                     function animate() {
                         h = requestAnimationFrame(animate);
-                        const delta = clock.getDelta();
                         controls.update();
                         renderer.render(scene, camera);
                     }

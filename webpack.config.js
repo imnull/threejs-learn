@@ -21,32 +21,32 @@ module.exports = () => {
         },
         module: {
             rules: [
-                // {
-                //     test: /\.[jt]sx?$/,
-                //     use: [
-                //         {
-                //             loader: 'esbuild-loader',
-                //             options: {
-                //                 // tsconfig: './tsconfig.json',
-                //                 // jsx: 'react-jsx'
-                //             }
-                //         }
-                //     ]
-                // },
                 {
                     test: /\.[jt]sx?$/,
-                    use: [{
-                        loader: 'babel-loader',
-                        options: {
-                            presets: [
-                                ['@babel/preset-react', {
-                                    runtime: 'automatic'
-                                }],
-                                '@babel/preset-typescript'
-                            ],
+                    use: [
+                        {
+                            loader: 'esbuild-loader',
+                            options: {
+                                // tsconfig: './tsconfig.json',
+                                // jsx: 'react-jsx'
+                            }
                         }
-                    }]
+                    ]
                 },
+                // {
+                //     test: /\.[jt]sx?$/,
+                //     use: [{
+                //         loader: 'babel-loader',
+                //         options: {
+                //             presets: [
+                //                 ['@babel/preset-react', {
+                //                     runtime: 'automatic'
+                //                 }],
+                //                 '@babel/preset-typescript'
+                //             ],
+                //         }
+                //     }]
+                // },
                 {
                     test: /\.css$/,
                     use: ['style-loader', 'css-loader']
