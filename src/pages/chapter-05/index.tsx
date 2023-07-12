@@ -48,7 +48,7 @@ export default () => {
             <Resource>
                 <ResourceLoader
                     type="gltf"
-                    uri="https://github.khronos.org/glTF-Sample-Viewer-Release/assets/models/2.0/DamagedHelmet/glTF/DamagedHelmet.gltf"
+                    uri="assets/models/DamagedHelmet.gltf"
                     scale={[8, 8, 8]}
                     position={[0, 0, 0]}
                     onLoad={gltf => {
