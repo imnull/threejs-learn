@@ -8,7 +8,7 @@ import { DRACOLoader } from '~/three-addons/loaders/DRACOLoader'
 import { OrbitControls } from '~/three-addons/controls/OrbitControls'
 import { RoomEnvironment } from '~/three-addons/environments/RoomEnvironment'
 
-const MODEL_URL = '/assets/models/DamagedHelmet.gltf'
+const MODEL_URL = 'https://github.khronos.org/glTF-Sample-Viewer-Release/assets/models/2.0/DamagedHelmet/glTF/DamagedHelmet.gltf'
 
 export default () => {
     return <>
