@@ -12,7 +12,7 @@ module.exports = (options) => {
         output: {
             path: path.resolve(target),
             filename: 'threejs-learn.js',
-            libraryTarget: 'commonjs2',
+            // libraryTarget: 'commonjs2',
         },
         resolve: {
             extensions: ['.tsx', '.ts', '.jsx', '.js'],

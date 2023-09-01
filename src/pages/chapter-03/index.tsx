@@ -21,6 +21,7 @@ export default () => {
                     points.push(new THREE.Vector3(-10, 0, 0));
                     points.push(new THREE.Vector3(0, 10, 0));
                     points.push(new THREE.Vector3(10, 0, 0));
+                    points.push(new THREE.Vector3(0, -10, 0));
 
                     const geometry = new THREE.BufferGeometry().setFromPoints(points);
 

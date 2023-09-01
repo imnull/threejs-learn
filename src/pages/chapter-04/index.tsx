@@ -8,7 +8,7 @@ import { DRACOLoader } from '~/three-addons/loaders/DRACOLoader'
 import { OrbitControls } from '~/three-addons/controls/OrbitControls'
 import { RoomEnvironment } from '~/three-addons/environments/RoomEnvironment'
 
-const MODEL_URL = 'assets/models/DamagedHelmet/DamagedHelmet.gltf'
+const MODEL_URL = '/assets/my-models/football.gltf'
 
 export default () => {
     return <>
@@ -17,13 +17,13 @@ export default () => {
             <Archor url='https://threejs.org/docs/index.html#manual/en/introduction/Loading-3D-models' />
         </div>
         <ThreejsRender
+            cameraFar={10000}
             onMounted={
                 ({ camera, renderer, scene, canvas }) => {
 
-                    camera.position.set(0, 0, 30);
+                    camera.position.set(0, 50, 260);
                     camera.lookAt(0, 0, 0);
 
-                    const pmremGenerator = new THREE.PMREMGenerator(renderer);
 
                     const draco = new DRACOLoader()
                     draco.setDecoderConfig({ type: 'js' });
@@ -36,7 +36,16 @@ export default () => {
                     controls.enableDamping = true;
 
                     scene.background = new THREE.Color(0xbfe3dd);
+                    const pmremGenerator = new THREE.PMREMGenerator(renderer);
                     scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
+
+                    // const hemiLight = new THREE.HemisphereLight( 0xffffff, 0x8d8d8d, 0.8 );
+                    // hemiLight.position.set( 0, 220, 0 );
+                    // scene.add( hemiLight );
+
+                    // const dirLight = new THREE.DirectionalLight( 0xffffff, 1 );
+                    // dirLight.position.set( 0, 120, 0 );
+                    // scene.add( dirLight );
 
                     const loader = new GLTFLoader()
                     loader.setDRACOLoader(draco)
